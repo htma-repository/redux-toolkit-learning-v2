@@ -38,7 +38,7 @@ const profileReducer = (state = initProfile, action: Action) => {
   }
 };
 
-const store = redux.createStore(profileReducer);
+const store = redux.legacy_createStore(profileReducer);
 
 console.log("Init Store", store.getState());
 const unsubscribe = store.subscribe(() => {

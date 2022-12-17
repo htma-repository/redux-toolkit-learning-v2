@@ -1,8 +1,10 @@
-import redux from "redux";
-
-const createStore = redux.createStore;
-const bindActionCreators = redux.bindActionCreators;
-const combineReducers = redux.combineReducers;
+import {
+  applyMiddleware,
+  legacy_createStore,
+  bindActionCreators,
+  combineReducers,
+} from "redux";
+import logger from "redux-logger";
 
 export type Action = {
   type: string;
@@ -89,10 +91,10 @@ const rootReducers = combineReducers({
   drinks: drinksReducer,
 });
 
-const store = createStore(rootReducers);
+const store = legacy_createStore(rootReducers, applyMiddleware(logger));
 
 const unsubscribe = store.subscribe(() => {
-  console.log("Updated Store", store.getState());
+  // console.log("Updated Store", store.getState());
 });
 
 const action = bindActionCreators(
