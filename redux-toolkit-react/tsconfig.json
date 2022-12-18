@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "redux-core/store.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,10 +1,5 @@
-import redux from "redux";
-import immer from "immer";
-
-type Action = {
-  type: string;
-  payload: string;
-};
+const redux = require("redux");
+const immer = require("immer").produce;
 
 const CHANGE_ADDRESS = "CHANGE_ADDRESS";
 
@@ -19,14 +14,14 @@ const initProfile = {
   },
 };
 
-const profileActionCreator = (city: string) => {
+const profileActionCreator = (city) => {
   return {
     type: CHANGE_ADDRESS,
     payload: city,
   };
 };
 
-const profileReducer = (state = initProfile, action: Action) => {
+const profileReducer = (state = initProfile, action) => {
   switch (action.type) {
     case CHANGE_ADDRESS:
       return immer(state, (draft) => {

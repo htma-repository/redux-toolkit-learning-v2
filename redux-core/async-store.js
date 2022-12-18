@@ -1,6 +1,10 @@
-import { legacy_createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import axios from "axios";
+// import { legacy_createStore, applyMiddleware } from "redux";
+// import thunk from "redux-thunk";
+// import axios from "axios";
+
+const { legacy_createStore, applyMiddleware } = require("redux");
+const axios = require("axios");
+const thunk = require("redux-thunk").default;
 
 const initialState = {
   loading: false,
@@ -68,7 +72,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = legacy_createStore(reducer, applyMiddleware(thunk.default));
+const store = legacy_createStore(reducer, applyMiddleware(thunk));
 store.subscribe(() => {
   console.log(store.getState());
 });

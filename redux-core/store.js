@@ -1,43 +1,38 @@
-import {
+const {
   applyMiddleware,
   legacy_createStore,
   bindActionCreators,
   combineReducers,
-} from "redux";
-import logger from "redux-logger";
-
-export type Action = {
-  type: string;
-  payload: number;
-};
+} = require("redux");
+const logger = require("redux-logger").default;
 
 const ADD_FOOD = "ADD_FOOD";
 const REMOVE_FOOD = "REMOVE_FOOD";
 const ADD_DRINKS = "ADD_DRINKS";
 const REMOVE_DRINKS = "REMOVE_DRINKS";
 
-const foodAddActionCreator = (quantity: number) => {
+const foodAddActionCreator = (quantity) => {
   return {
     type: ADD_FOOD,
     payload: quantity,
   };
 };
 
-const foodRemoveActionCreator = (quantity: number) => {
+const foodRemoveActionCreator = (quantity) => {
   return {
     type: REMOVE_FOOD,
     payload: quantity,
   };
 };
 
-const drinksAddActionCreator = (quantity: number) => {
+const drinksAddActionCreator = (quantity) => {
   return {
     type: ADD_DRINKS,
     payload: quantity,
   };
 };
 
-const drinksRemoveActionCreator = (quantity: number) => {
+const drinksRemoveActionCreator = (quantity) => {
   return {
     type: REMOVE_DRINKS,
     payload: quantity,
@@ -52,7 +47,7 @@ const initDrinksState = {
   quantity: 20,
 };
 
-const foodReducer = (state = initFoodState, action: Action) => {
+const foodReducer = (state = initFoodState, action) => {
   switch (action.type) {
     case ADD_FOOD:
       return {
@@ -69,7 +64,7 @@ const foodReducer = (state = initFoodState, action: Action) => {
   }
 };
 
-const drinksReducer = (state = initDrinksState, action: Action) => {
+const drinksReducer = (state = initDrinksState, action) => {
   switch (action.type) {
     case ADD_DRINKS:
       return {
@@ -94,7 +89,7 @@ const rootReducers = combineReducers({
 const store = legacy_createStore(rootReducers, applyMiddleware(logger));
 
 const unsubscribe = store.subscribe(() => {
-  // console.log("Updated Store", store.getState());
+  console.log("Updated Store", store.getState());
 });
 
 const action = bindActionCreators(
@@ -106,10 +101,6 @@ const action = bindActionCreators(
   },
   store.dispatch
 );
-
-// store.dispatch(foodActionCreator(1));
-// store.dispatch(foodActionCreator(1));
-// store.dispatch(foodActionCreator(1));
 
 action.foodAddActionCreator(1);
 action.foodAddActionCreator(1);
