@@ -1,7 +1,8 @@
 const { createSlice } = require("@reduxjs/toolkit");
+const { drinksAction } = require("./drinkSlice");
 
 const initialState = {
-  quantity: 10,
+  foodQuantity: 10,
 };
 
 const foodSlice = createSlice({
@@ -9,11 +10,22 @@ const foodSlice = createSlice({
   initialState,
   reducers: {
     addFood: (state, action) => {
-      state.quantity += action.payload;
+      state.foodQuantity += action.payload;
     },
     removeFood: (state, action) => {
-      state.quantity -= action.payload;
+      state.foodQuantity -= action.payload;
     },
+  },
+  // extraReducers: {
+  //   ["drink/addDrinks"]: (state, action) => {
+  //     console.log("drink/removeDrinks", state.quantity);
+  //     state.quantity++;
+  //   },
+  // },
+  extraReducers: (builder) => {
+    builder.addCase(drinksAction.addDrinks, (state) => {
+      state.foodQuantity++;
+    });
   },
 });
 
